@@ -78,7 +78,7 @@ with st.form(key="sio_survey_form", clear_on_submit=True):
     st.write("補充：")
     st.write("1. 包棟費用計算方式：「每晚包棟費用」除以「總人頭數」，大人算1人頭，小孩算0.5人頭")
     st.write("2. 露營費用計算方式：比照初露，各自負擔所屬營地費及設備租用費")
-    st.write()"範例：育德家兩大人兩小孩，故需乘3")
+    st.write("範例：育德家兩大人兩小孩，故需乘3")
 
     # 自由意見回饋 (簡答題)
     suggestions = st.text_area("對於家族旅遊有什麼建議，請在此留言：")
