@@ -72,9 +72,8 @@ with st.form(key="sio_survey_form", clear_on_submit=True):
 
     Price_preference = st.radio(
         "5. 因包棟價位較高，約露營的1.5-2.5倍，故可接受家族旅遊住宿每人每晚價位(元/晚*人)為?",
-        ["1500 ~ 2000", "2000 ~ 2500", "2500 ~ 3000", "3000 ~ 3500", ""]
+        ["1500 ~ 2000", "2000 ~ 2500", "2500 ~ 3000", "3000 ~ 3500", "無所謂😎🤘🔥"]
     )
-    st.write("---------------------------------------------------------------------")
     st.write("補充：")
     st.write("1. 包棟費用計算方式：「每晚包棟費用」除以「總人頭數」，大人算1人頭，小孩算0.5人頭")
     st.write("2. 露營費用計算方式：比照初露，各自負擔所屬營地費及設備租用費")
@@ -94,6 +93,7 @@ if submit_button:
         "冬天舉辦天數": Days_preference,
         "暑假舉辦型式": Summer_preference,
         "暑假家旅天數": Summerday_preference,
+        "旅遊地點": travel_options,
         "可接受價位": Price_preference,
         "留言建議": suggestions
     }
