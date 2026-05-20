@@ -83,9 +83,18 @@ if submit_button:
     else:
         df_new.to_csv(csv_file, mode='a', header=False, index=False, encoding="utf-8-sig")
         
+    # 💡 戰術修正：不當場噴氣球，而是先在雲端筆記本寫下「已成功」
+    st.session_state["submitted"] = True
+    st.rerun() # 安心重新整理網頁
+
+# =====================================================================
+# 🎈 網頁重整完畢後，檢查筆記本，這時候再噴氣球就不會被擦掉了！
+# =====================================================================
+if st.session_state.get("submitted", False):
     st.balloons()
     st.success("情資已加密傳輸至 SIO 中央數據庫，感謝您的協助！")
-    st.rerun() # 送出後重整網頁，更新下方表格
+    # 噴完後把筆記本擦乾淨，避免每次重整網頁都重複噴氣球
+    st.session_state["submitted"] = False
 
 # =====================================================================
 # 🔐 SIO 首席執行官秘密通道 (移到 if 外部，讓它隨時顯示在網頁最下方)
