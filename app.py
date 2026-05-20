@@ -17,15 +17,31 @@ csv_file = "sio_responses.csv"
 # =====================================================================
 # 🛠️ 萬能修復手段：如果之前的 CSV 壞掉了，提供一個緊急重置按鈕
 # =====================================================================
+# =====================================================================
+# ⚙️ 管理員緊急控制台 (安全密碼鎖防護版)
+# =====================================================================
 with st.sidebar:
     st.write("⚙️ **管理員緊急控制台**")
-    if st.button("⚠️ 重置/清空雲端資料庫"):
-        if os.path.isfile(csv_file):
-            os.remove(csv_file)
-            st.success("舊資料庫已成功粉碎清空！")
-            st.rerun()
-        else:
-            st.info("資料庫目前本來就是空的。")
+    
+    # 1. 在側邊欄加上一個獨立的密碼輸入框
+    sidebar_password = st.text_input("🔑 請輸入控制台授權密碼：", type="password", key="sidebar_pwd")
+    
+    # 2. 只有密碼正確，才會顯示出「重置/清空」按鈕
+    if sidebar_password == "sio2026":  # 您可以改成跟下載區一樣的密碼，或是設更難的
+        st.warning("⚠️ 警告：高階控制權限已開啟")
+        
+        # 密碼正確才現形的毀滅按鈕
+        if st.button("🚨 執行！重置/清空雲端資料庫"):
+            if os.path.isfile(csv_file):
+                os.remove(csv_file)
+                st.success("舊資料庫已成功粉碎清空！")
+                st.rerun()
+            else:
+                st.info("資料庫目前本來就是空的。")
+                
+    # 3. 如果輸入錯誤密碼，給予警示
+    elif sidebar_password != "":
+        st.error("🔒 密碼錯誤，控制台已鎖定。")
 
 # 4. 問卷表單設計
 with st.form(key="sio_survey_form", clear_on_submit=True):
