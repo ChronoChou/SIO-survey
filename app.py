@@ -67,7 +67,6 @@ with st.form(key="sio_survey_form", clear_on_submit=True):
 if submit_button:
     # 建立單筆紀錄資料
     survey_data = {
-        "填寫時間": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "冬天是否再小路舉辦露營": camp_choice,
         "冬天舉辦天數": Days_preference,
         "暑假舉辦型式": Summer_preference,
