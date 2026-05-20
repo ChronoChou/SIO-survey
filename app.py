@@ -29,7 +29,10 @@ with st.sidebar:
 
 # 4. 問卷表單設計
 with st.form(key="sio_survey_form", clear_on_submit=True):
-    
+    agent_name = st.text_input(
+        "請選擇您的匿名代號：",placeholder="例如：apple-1、banana-2..." # 這是輸入框內淡淡的提示字，點擊打字就會消失
+    )
+    st.write("--------------------------------------------------------")    
     # 營地選擇 (單選題)
     camp_choice = st.radio(
         "1. 預計冬天再舉辦一次露營，地點同樣是小路露營區",
@@ -89,6 +92,7 @@ with st.form(key="sio_survey_form", clear_on_submit=True):
 if submit_button:
     # 建立單筆紀錄資料
     survey_data = {
+        "匿名代號": agent_name,
         "冬天是否再小路舉辦露營": camp_choice,
         "冬天舉辦天數": Days_preference,
         "暑假舉辦型式": Summer_preference,
