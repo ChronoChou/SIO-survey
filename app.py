@@ -9,14 +9,14 @@ st.set_page_config(page_title="SIO 情資收集系統", page_icon="🦉", layout
 # =====================================================================
 # 🖼️ SIO 官方徽章置頂 (完美置中版)
 # =====================================================================
-if os.path.isfile("sio_3.png"):
+if os.path.isfile("sio_4.png"):
     # 建立三個左右對稱的虛擬欄位，比例為 1 : 2 : 1 
     # 中間的欄位比例較大(2)，用來放圖片；左右兩邊(1)負責當隱形推手
     left_co, cent_co, right_co = st.columns([1, 2, 1])
     
     # 叫 Streamlit 把圖片畫在中間那一欄
     with cent_co:
-        st.image("sio_3.png", use_container_width=True)
+        st.image("sio_4.png", use_container_width=True)
 # =====================================================================
 
 # 2. 標題與視覺營造
