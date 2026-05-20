@@ -25,7 +25,7 @@ if os.path.isfile("sio_3.png"):
 if os.path.isfile("sio_5.png"):
     # 建立三個左右對稱的虛擬欄位，比例為 1 : 2 : 1 
     # 中間的欄位比例較大(2)，用來放圖片；左右兩邊(1)負責當隱形推手
-    left_co, cent_co, right_co = st.columns([1, 8, 1])
+    left_co, cent_co, right_co = st.columns([1, 16, 1])
     
     # 叫 Streamlit 把圖片畫在中間那一欄
     with cent_co:
