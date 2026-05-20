@@ -65,3 +65,32 @@ if submit_button:
     # 畫面上顯示成功訊息 (帶有 SIO 特有的吃瓜幽默)
     st.balloons()
     st.success(f"感謝特務 {agent_name}！情資已加密傳輸至 SIO 中央數據庫。")
+
+    # =====================================================================
+# 🔐 SIO 首席執行官秘密通道 (在網頁最下方加上數據下載功能)
+# =====================================================================
+st.markdown("---")
+st.write("### 🔐 管理員專屬情資下載區")
+
+# 檢查雲端主機裡是否已經有成員填寫的 CSV 檔
+if os.path.isfile(csv_file):
+    # 讀取目前的問卷數據
+    df_download = pd.read_csv(csv_file, encoding="utf-8-sig")
+    
+    # 將資料轉換為 Streamlit 下載按鈕需要的 0與1 格式 (Binary)
+    csv_data = df_download.to_csv(index=False).encode('utf-8-sig')
+    
+    # 建立一個超帥的下載按鈕！
+    st.download_button(
+        label="📥 下載最新問卷數據 (SIO_Responses.csv)",
+        data=csv_data,
+        file_name=f"SIO_Responses_{datetime.now().strftime('%m%d')}.csv",
+        mime="text/csv",
+        key="download_secret_button"
+    )
+    
+    # 炫技功能：順便在網頁上直接顯示目前的即時數據表格，讓您不用下載也能看
+    st.write("📊 目前即時情資預覽：")
+    st.dataframe(df_download)
+else:
+    st.info("💡 目前資料庫尚無數據 (還沒有任何特務提交問卷喔！)")
