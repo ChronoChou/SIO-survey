@@ -7,28 +7,21 @@ from datetime import datetime
 st.set_page_config(page_title="SIO 情資收集系統", page_icon="🦉", layout="centered")
 
 # =====================================================================
-# 🖼️ 頂部視覺完美大升級：雙徽章夾標題流
+# 🖼️ 首席視覺：手繪家族貼圖 (完美大圖置中版)
 # =====================================================================
-# 建立三個欄位，比例為 1 : 4 : 1（左右放圖，中間放文字）
-col1, col2, col3 = st.columns([1, 4, 1])
-
-# 1. 左邊第一欄：放 SIO 藍色貓頭鷹徽章
-with col1:
-    if os.path.isfile("sio_logo.png"):
-        st.image("sio_logo.png", use_container_width=True)
-
-# 2. 中間第二欄：放核心大標題 (設定置中對齊，讓字夾在兩張圖正中間)
-with col2:
-    st.markdown(
-        "<h1 style='text-align: center; padding-top: 15px; font-size: 36px;'>家族旅遊意向調查</h1>", 
-        unsafe_allow_html=True
-    )
-
-# 3. 右邊第三欄：放手繪家族大頭貼 (sio_3.png)
-with col3:
-    if os.path.isfile("sio_3.png"):
+# 請確認您的 GitHub 倉庫裡有上傳手繪貼圖，且檔名是 sio_3.png
+if os.path.isfile("sio_3.png"):
+    # 我們一樣用 columns 來達成「擠在中央」的效果
+    # 比例設定為 [1, 5, 1]，讓中間那一欄佔比超大(83%)，左右空的很小，達到大圖效果
+    left_co, cent_co, right_co = st.columns([1, 5, 1])
+    
+    with cent_co:
+        # use_container_width=True 代表讓圖片自動填滿中間這格超大的欄位
         st.image("sio_3.png", use_container_width=True)
+# =====================================================================
 
+# 2. 標題與視覺營造 (維持居中文字標題)
+st.markdown("<h1 style='text-align: center; padding-top: 10px;'>🦉 家族旅遊意向調查 🦉</h1>", unsafe_allow_html=True)
 st.markdown("---")
 # =====================================================================
 
