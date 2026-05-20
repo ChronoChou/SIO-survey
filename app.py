@@ -19,12 +19,18 @@ if os.path.isfile("sio_3.png"):
         st.image("sio_3.png", use_container_width=True)
 # =====================================================================
 
-# 2. 標題與視覺營造
-# 我們用 HTML 的 <h1> 標籤，並加上 style="text-align: center;" 來強迫文字絕對居中
-st.markdown("<h1 style='text-align: center;'>---🦉 --------------------- 🦉---</h1>", unsafe_allow_html=True)
-st.markdown("<h1 style='text-align: center;'>家族旅遊意向調查</h1>", unsafe_allow_html=True)
-st.markdown("<h1 style='text-align: center;'>---🦉 --------------------- 🦉---</h1>", unsafe_allow_html=True)
-st.markdown("---")
+# =====================================================================
+# 🖼️ SIO 官方徽章置頂 (完美置中版)
+# =====================================================================
+if os.path.isfile("sio_5.png"):
+    # 建立三個左右對稱的虛擬欄位，比例為 1 : 2 : 1 
+    # 中間的欄位比例較大(2)，用來放圖片；左右兩邊(1)負責當隱形推手
+    left_co, cent_co, right_co = st.columns([1, 5, 1])
+    
+    # 叫 Streamlit 把圖片畫在中間那一欄
+    with cent_co:
+        st.image("sio_5.png", use_container_width=True)
+# =====================================================================
 
 # 3. 定義資料庫路徑
 csv_file = "sio_responses.csv"
