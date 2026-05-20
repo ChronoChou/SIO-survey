@@ -23,7 +23,7 @@ if os.path.isfile("sio_3.png"):
 # 我們用 HTML 的 <h1> 標籤，並加上 style="text-align: center;" 來強迫文字絕對居中
 st.markdown("<h1 style='text-align: center;'>---🦉 --------------------- 🦉---</h1>", unsafe_allow_html=True)
 st.markdown("<h1 style='text-align: center;'>家族旅遊意向調查</h1>", unsafe_allow_html=True)
-st.markdown("<h1 style='text-align: center;'>🦉 --------------------- 🦉</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center;'>---🦉 --------------------- 🦉---</h1>", unsafe_allow_html=True)
 st.markdown("---")
 
 # 3. 定義資料庫路徑
