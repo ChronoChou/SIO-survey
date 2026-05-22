@@ -10,8 +10,8 @@ st.set_page_config(page_title="SIO 情資收集系統", page_icon="🦉", layout
 # =====================================================================
 # 🔒 SIO 官方防偽浮水印（內嵌白底遮罩防遮擋版）
 # =====================================================================
-if os.path.isfile("sio_logo.png"):
-    with open("sio_logo.png", "rb") as img_file:
+if os.path.isfile("sio_6.png"):
+    with open("sio_6.png", "rb") as img_file:
         b64_string = base64.b64encode(img_file.read()).decode()
     
     st.markdown(
@@ -211,32 +211,39 @@ if st.session_state.get("submitted", False):
     st.session_state["submitted_agent"] = ""
 
 # =====================================================================
-# 📊 管理員專屬情資下載區 (已全面開放給全體成員瀏覽與下載)
+# 🔐 SIO 首席執行官秘密通道 (高階授權密碼鎖安全版)
 # =====================================================================
 st.markdown("---")
-st.write("### 📊 全體成員情資下載與預覽區")
+st.write("### 🔐 管理員專屬情資下載區")
 
-# 檢查雲端主機裡是否已經有成員填寫的 CSV 檔
-if os.path.isfile(csv_file):
-    try:
-        # 讀取目前的問卷數據
-        df_download = pd.read_csv(csv_file, encoding="utf-8-sig")
+admin_password = st.text_input("🔑 請輸入 SIO 高階授權密碼鎖解鎖通道：", type="password", key="download_pwd")
+
+if admin_password == "sio2026":
+    st.success("🔓 執行官身分驗證成功！中央數據庫通道已開啟。")
+    
+    if os.path.isfile(csv_file):
+        try:
+            # 讀取目前的問卷數據
+            df_download = pd.read_csv(csv_file, encoding="utf-8-sig")
+            
+            # 將資料轉換為 Streamlit 下載按鈕需要的格式
+            csv_data = df_download.to_csv(index=False).encode('utf-8-sig')
+            
+            # 建立下載按鈕
+            st.download_button(
+                label="📥 下載最新問卷數據 (SIO_Responses.csv)",
+                data=csv_data,
+                file_name=f"SIO_Responses_{datetime.now().strftime('%m%d')}.csv",
+                mime="text/csv",
+                key="download_secret_button"
+            )
+            
+            st.write("📊 目前即時情資預覽：")
+            st.dataframe(df_download)
+        except Exception as e:
+            st.error("⚠️ 偵測到雲端 CSV 資料結構損壞！請使用左側側邊欄的『緊急控制台』按鈕清空重置。")
+    else:
+        st.info("💡 目前資料庫尚無數據 (填寫完成並按送出後，下載按鈕就會出現在這喔！)")
         
-        # 將資料轉換為 Streamlit 下載按鈕需要的格式
-        csv_data = df_download.to_csv(index=False).encode('utf-8-sig')
-        
-        # 建立下載按鈕 (任何人都可以直接點擊下載)
-        st.download_button(
-            label="📥 下載最新問卷數據 (SIO_Responses.csv)",
-            data=csv_data,
-            file_name=f"SIO_Responses_{datetime.now().strftime('%m%d')}.csv",
-            mime="text/csv",
-            key="download_public_button"
-        )
-        
-        st.write("📊 目前即時情資預覽：")
-        st.dataframe(df_download)
-    except Exception as e:
-        st.error("⚠️ 偵測到雲端 CSV 資料結構損壞！請聯絡首席執行官使用左側控制台清空重置。")
-else:
-    st.info("💡 目前資料庫尚無數據 (填寫完成並按送出後，大家就能在這裡看到即時數據囉！)")
+elif admin_password != "":
+    st.error("🚨 警告：密碼錯誤！非授權特務試圖入侵。")
