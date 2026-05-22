@@ -17,7 +17,7 @@ if os.path.isfile("sio_logo.png"):
     st.markdown(
         f"""
         <style>
-        /* 直接鎖定主底層，利用 linear-gradient 在圖片上方塗一層 50% 的透明白漆 */
+        /* 直接鎖定主底層，利用 linear-gradient 在圖片上方塗一層 95% 的透明白漆 */
         .stApp {{
             background-image: 
                 linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), 
