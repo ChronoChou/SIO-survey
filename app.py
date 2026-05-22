@@ -50,7 +50,7 @@ if os.path.isfile("sio_3.png"):
 # =====================================================================
 # 2. 標題與視覺營造
 # 2. 標題與視覺營造 (限制字體大小，確保手機版完美呈現單一行)
-st.markdown("<h1 style='text-align: center; padding-top: 10px; font-size: 28px;'>家族旅遊意向調查</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; padding-top: 10px; font-size: 28px;'>   家族旅遊意向調查</h1>", unsafe_allow_html=True)
 st.markdown("---")
 # =====================================================================
 
