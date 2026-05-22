@@ -101,7 +101,7 @@ with st.sidebar:
 # 4. 問卷表單設計
 with st.form(key="sio_survey_form", clear_on_submit=True):
     agent_name = st.text_input(
-        "請選擇您的匿名代號：", placeholder="例如：apple_1、banana_2..." 
+        "請選擇您的匿名代號：", placeholder="例如：apple-1、banana-2..." 
     )
     st.write("--------------------------------------------------------")    
     
@@ -164,7 +164,9 @@ with st.form(key="sio_survey_form", clear_on_submit=True):
     
     st.write("----------------------------------")
     # 自由意見回饋 (簡答題)
-    suggestions = st.text_area("對於家族旅遊有什麼建議，請在此留言：")
+    suggestions1 = st.text_area("對於初露有什麼建議，請在此留言：")
+
+    suggestions2 = st.text_area("對於家族旅遊有什麼建議，請在此留言：")
     
     # 送出按鈕
     submit_button = st.form_submit_button(label="🚀 發送情資 (Submit)")
@@ -181,7 +183,8 @@ if submit_button:
         "旅遊地點": ", ".join(selected_places),  # 💡 Bug已修正：確實儲存成員勾選的地點清單
         "暑假家旅天數": Summerday_preference,
         "可接受價位": Price_preference,
-        "留言建議": suggestions
+        "初露留言建議": suggestions1,
+        "家旅留言建議": suggestions2
     }
     
     df_new = pd.DataFrame([survey_data])
