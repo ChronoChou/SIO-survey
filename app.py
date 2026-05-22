@@ -8,36 +8,40 @@ from datetime import datetime
 st.set_page_config(page_title="SIO 情資收集系統", page_icon="🦉", layout="centered")
 
 # =====================================================================
-# 🔒 SIO 官方防偽浮水印（Base64 終極不失手部署）
+# 🔒 SIO 官方防偽浮水印（最高指揮權重版）
 # =====================================================================
-# 檢查組織 Logo 檔案是否存在
 if os.path.isfile("sio_logo.png"):
     with open("sio_logo.png", "rb") as img_file:
-        # 將圖片轉換為瀏覽器絕對看得懂的純文字編碼
         b64_string = base64.b64encode(img_file.read()).decode()
     
-    # 注入強化版 CSS，直接用編碼當作背景圖
     st.markdown(
         f"""
         <style>
+        /* 使用 html, body 和 .stApp 進行多重強制鎖定 */
+        html, body, .stApp {{
+            position: relative;
+        }}
+        
         .stApp::before {{
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url("data:image/png;base64,{b64_string}");
-            background-repeat: no-repeat;
-            background-position: center 38%; /* 控制浮水印上下位置 */
-            background-size: 400px;          /* 控制浮水印大小 */
-            background-attachment: fixed;    /* 鎖定背景不隨滾輪滑動 */
-            opacity: 0.05;                   /* 💡 5% 透明度，隱隱約約剛剛好 */
-            z-index: -1;                     /* 確保圖層在最底層，不干擾按鈕 */
+            content: "" !important;
+            position: fixed !important; /* 改為 fixed，確保不管怎麼滑都在螢幕正中 */
+            top: 0 !important; 
+            left: 0 !important; 
+            width: 100vw !important; 
+            height: 100vh !important;
+            background-image: url("data:image/png;base64,{b64_string}") !important;
+            background-repeat: no-repeat !important;
+            background-position: center center !important; /* 絕對居中 */
+            background-size: 380px !important;            /* 微調大小 */
+            opacity: 0.08 !important;                     /* 💡 提高到 8% 透明度，讓它更清晰一些 */
+            z-index: -9999 !important;                    /* 推到最最最底層，絕對不影響點擊 */
+            pointer-events: none !important;              /* 讓滑鼠與手指可以直接穿透圖片 */
         }}
         </style>
         """,
         unsafe_allow_html=True
     )
 # =====================================================================
-
 # =====================================================================
 # 🖼️ SIO 官方徽章置頂 (完美置中版)
 # =====================================================================
