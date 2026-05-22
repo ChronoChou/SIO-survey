@@ -20,7 +20,7 @@ if os.path.isfile("sio_logo.png"):
         /* 直接鎖定主底層，利用 linear-gradient 在圖片上方塗一層 95% 的透明白漆 */
         .stApp {{
             background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.55)), 
+                linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), 
                 url("data:image/png;base64,{b64_string}") !important;
             background-repeat: no-repeat !important;
             background-position: center 38% !important; /* 控制浮水印上下位置 */
@@ -48,14 +48,10 @@ if os.path.isfile("sio_3.png"):
 # =====================================================================
 # 🖼️ SIO 官方徽章置頂 (完美置中版)
 # =====================================================================
-if os.path.isfile("sio_5.png"):
-    # 建立三個左右對稱的虛擬欄位，比例為 1 : 2 : 1 
-    # 中間的欄位比例較大(2)，用來放圖片；左右兩邊(1)負責當隱形推手
-    left_co, cent_co, right_co = st.columns([1, 5, 1])
-    
-    # 叫 Streamlit 把圖片畫在中間那一欄
-    with cent_co:
-        st.image("sio_5.png", use_container_width=True)
+# 2. 標題與視覺營造
+# 我們用 HTML 的 <h1> 標籤，並加上 style="text-align: center;" 來強迫文字絕對居中
+st.markdown("<h1 style='text-align: center;'> ---家族旅遊意向調查--- </h1>", unsafe_allow_html=True)
+st.markdown("---")
 # =====================================================================
 
 # 3. 定義資料庫路徑
