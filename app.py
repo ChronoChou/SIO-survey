@@ -82,7 +82,7 @@ with st.sidebar:
     sidebar_password = st.text_input("🔑 請輸入控制台授權密碼：", type="password", key="sidebar_pwd")
     
     # 2. 只有密碼正確，才會顯示出「重置/清空」按鈕
-    if sidebar_password == "sio2026":  # 您可以改成跟下載區一樣的密碼，或是設更難的
+    if sidebar_password == "ilovesio":  # 您可以改成跟下載區一樣的密碼，或是設更難的
         st.warning("⚠️ 警告：高階控制權限已開啟")
         
         # 密碼正確才現形的毀滅按鈕
