@@ -45,16 +45,30 @@ if os.path.isfile("sio_3.png"):
         st.image("sio_3.png", use_container_width=True)
 # =====================================================================
 
-# =====================================================================
-# 🖼️ SIO 官方徽章置頂 (完美置中版)
-# =====================================================================
-# 2. 標題與視覺營造 (加上 letter-spacing 與 width 控制，確保手機版視覺絕對對稱)
+# 2. 標題與視覺營造 (啟動 Flexbox 磁力吸盤，徹底解決 Emoji 干擾造成的偏心問題)
 st.markdown(
-    "<h1 style='text-align: center; padding-top: 10px; font-size: 27px; letter-spacing: 2px; width: 100%; display: block;'>🦉 家族旅遊意向調查 🦉</h1>", 
+    """
+    <div style="
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+        width: 100%; 
+        padding: 10px 0;
+    ">
+        <span style="font-size: 26px; visibility: hidden;">🦉</span>
+        <h1 style="
+            font-size: 26px; 
+            margin: 0; 
+            text-align: center; 
+            flex-grow: 1; 
+            letter-spacing: 1px;
+            font-weight: bold;
+        ">🦉 家族旅遊意向調查 🦉</h1>
+        <span style="font-size: 26px; visibility: hidden;">🦉</span>
+    </div>
+    """, 
     unsafe_allow_html=True
 )
-st.markdown("---")
-# =====================================================================
 
 # 3. 定義資料庫路徑
 csv_file = "sio_responses.csv"
