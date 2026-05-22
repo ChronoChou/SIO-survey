@@ -164,9 +164,9 @@ with st.form(key="sio_survey_form", clear_on_submit=True):
     
     st.write("----------------------------------")
     # 自由意見回饋 (簡答題)
-    suggestions1 = st.text_area("對於初露有什麼建議，請在此留言：", placeholder="一定要寫喔!建議跟鼓勵的話都可以~")
+    suggestions1 = st.text_area("**對於初露有什麼建議，請在此留言：**", placeholder="一定要寫喔!建議跟鼓勵的話都可以~")
 
-    suggestions2 = st.text_area("對於家族旅遊有什麼建議，請在此留言：",placeholder="一定要寫喔!建議跟鼓勵的話都可以~")
+    suggestions2 = st.text_area("**對於家族旅遊有什麼建議，請在此留言：**",placeholder="一定要寫喔!建議跟鼓勵的話都可以~")
     
     # 送出按鈕
     submit_button = st.form_submit_button(label="🚀 發送情資 (Submit)")
