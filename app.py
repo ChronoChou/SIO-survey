@@ -48,9 +48,11 @@ if os.path.isfile("sio_3.png"):
 # =====================================================================
 # 🖼️ SIO 官方徽章置頂 (完美置中版)
 # =====================================================================
-# 2. 標題與視覺營造
-# 2. 標題與視覺營造 (限制字體大小，確保手機版完美呈現單一行)
-st.markdown("<h1 style='text-align: center; padding-top: 10px; font-size: 32px;'>家族旅遊意向調查</h1>", unsafe_allow_html=True)
+# 2. 標題與視覺營造 (加上 letter-spacing 與 width 控制，確保手機版視覺絕對對稱)
+st.markdown(
+    "<h1 style='text-align: center; padding-top: 10px; font-size: 27px; letter-spacing: 2px; width: 100%; display: block;'>🦉 家族旅遊意向調查 🦉</h1>", 
+    unsafe_allow_html=True
+)
 st.markdown("---")
 # =====================================================================
 
