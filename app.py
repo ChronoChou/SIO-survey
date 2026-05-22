@@ -8,7 +8,7 @@ from datetime import datetime
 st.set_page_config(page_title="SIO 情資收集系統", page_icon="🦉", layout="centered")
 
 # =====================================================================
-# 🔒 SIO 官方防偽浮水印（最高指揮權重版）
+# 🔒 SIO 官方防偽浮水印（內嵌白底遮罩防遮擋版）
 # =====================================================================
 if os.path.isfile("sio_logo.png"):
     with open("sio_logo.png", "rb") as img_file:
@@ -17,25 +17,15 @@ if os.path.isfile("sio_logo.png"):
     st.markdown(
         f"""
         <style>
-        /* 使用 html, body 和 .stApp 進行多重強制鎖定 */
-        html, body, .stApp {{
-            position: relative;
-        }}
-        
-        .stApp::before {{
-            content: "" !important;
-            position: fixed !important; /* 改為 fixed，確保不管怎麼滑都在螢幕正中 */
-            top: 0 !important; 
-            left: 0 !important; 
-            width: 100vw !important; 
-            height: 100vh !important;
-            background-image: url("data:image/png;base64,{b64_string}") !important;
+        /* 直接鎖定主底層，利用 linear-gradient 在圖片上方塗一層 95% 的透明白漆 */
+        .stApp {{
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), 
+                url("data:image/png;base64,{b64_string}") !important;
             background-repeat: no-repeat !important;
-            background-position: center center !important; /* 絕對居中 */
-            background-size: 380px !important;            /* 微調大小 */
-            opacity: 0.08 !important;                     /* 💡 提高到 8% 透明度，讓它更清晰一些 */
-            z-index: -9999 !important;                    /* 推到最最最底層，絕對不影響點擊 */
-            pointer-events: none !important;              /* 讓滑鼠與手指可以直接穿透圖片 */
+            background-position: center 38% !important; /* 控制浮水印上下位置 */
+            background-size: 420px !important;          /* 控制浮水印大小 */
+            background-attachment: fixed !important;    /* 固定背景不隨滾輪滑動 */
         }}
         </style>
         """,
