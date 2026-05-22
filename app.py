@@ -20,7 +20,7 @@ if os.path.isfile("sio_logo.png"):
         /* 直接鎖定主底層，利用 linear-gradient 在圖片上方塗一層 95% 的透明白漆 */
         .stApp {{
             background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), 
+                linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.55)), 
                 url("data:image/png;base64,{b64_string}") !important;
             background-repeat: no-repeat !important;
             background-position: center 38% !important; /* 控制浮水印上下位置 */
