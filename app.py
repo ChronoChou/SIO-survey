@@ -205,7 +205,7 @@ if submit_button:
 if st.session_state.get("submitted", False):
     st.balloons()
     current_agent = st.session_state.get("submitted_agent", "")
-    st.success(f"💥 情資已加密傳輸！感謝特務 【{current_agent}】 協助本次 SIO 調查！")
+    st.success(f"💥 情資已加密傳輸！感謝協助本次 SIO 調查！")
     # 噴完後把筆記本擦乾淨，避免每次重整網頁都重複噴氣球
     st.session_state["submitted"] = False
     st.session_state["submitted_agent"] = ""
