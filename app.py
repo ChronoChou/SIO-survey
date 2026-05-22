@@ -101,7 +101,7 @@ with st.sidebar:
 # 4. 問卷表單設計
 with st.form(key="sio_survey_form", clear_on_submit=True):
     agent_name = st.text_input(
-        "請選擇您的匿名代號：", placeholder="例如：apple-1、banana-2..." 
+        "請選擇您的匿名代號：", placeholder="例如：apple_1、banana_2..." 
     )
     st.write("--------------------------------------------------------")    
     
