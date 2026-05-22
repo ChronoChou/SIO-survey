@@ -1,42 +1,37 @@
 import streamlit as st
 import pandas as pd
 import os
+import base64  # 💡 隆重請出二進位加密套件
 from datetime import datetime
 
 # 1. 網頁基本設定 (特務機關風格)
 st.set_page_config(page_title="SIO 情資收集系統", page_icon="🦉", layout="centered")
 
 # =====================================================================
-# 🔒 SIO 官方防偽浮水印安全部署 (注入 CSS 樣式)
+# 🔒 SIO 官方防偽浮水印（Base64 終極不失手部署）
 # =====================================================================
-# 檢查有沒有 logo 圖，有的話才啟動浮水印
+# 檢查組織 Logo 檔案是否存在
 if os.path.isfile("sio_logo.png"):
+    with open("sio_logo.png", "rb") as img_file:
+        # 將圖片轉換為瀏覽器絕對看得懂的純文字編碼
+        b64_string = base64.b64encode(img_file.read()).decode()
+    
+    # 注入強化版 CSS，直接用編碼當作背景圖
     st.markdown(
-        """
+        f"""
         <style>
-        /* 鎖定 Streamlit 的主網頁背景 */
-        .stApp {
-            background-image: url("app/static/sio_logo.png");
-            background-repeat: no-repeat;
-            background-position: center 35%; /* 讓 logo 靠中、偏中上段顯示 */
-            background-size: 450px;          /* 浮水印的大小，可根據喜好調整 */
-            background-attachment: fixed;    /* 關鍵：固定背景，網頁滾動時浮水印不會跑掉 */
-            opacity: 1;                      /* 保持外層正常 */
-        }
-        
-        /* 透過偽元素單獨控制背景圖的透明度，才不會讓問卷的字也跟著變透明 */
-        .stApp::before {
+        .stApp::before {{
             content: "";
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url("app/static/sio_logo.png");
+            background-image: url("data:image/png;base64,{b64_string}");
             background-repeat: no-repeat;
-            background-position: center 35%;
-            background-size: 450px;
-            background-attachment: fixed;
-            opacity: 0.04;                   /* 💡 核心參數：0.04 代表 4% 透明度，隱隱約約最像防偽浮水印 */
-            z-index: -1;                     /* 把圖層推到最後面，絕對不會擋到按鈕和字 */
-        }
+            background-position: center 38%; /* 控制浮水印上下位置 */
+            background-size: 400px;          /* 控制浮水印大小 */
+            background-attachment: fixed;    /* 鎖定背景不隨滾輪滑動 */
+            opacity: 0.05;                   /* 💡 5% 透明度，隱隱約約剛剛好 */
+            z-index: -1;                     /* 確保圖層在最底層，不干擾按鈕 */
+        }}
         </style>
         """,
         unsafe_allow_html=True
