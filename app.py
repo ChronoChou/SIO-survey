@@ -218,7 +218,7 @@ st.write("### 🔐 管理員專屬情資下載區")
 
 admin_password = st.text_input("🔑 請輸入 SIO 高階授權密碼鎖解鎖通道：", type="password", key="download_pwd")
 
-if admin_password == "sio2026":
+if admin_password == "ilovesio":
     st.success("🔓 執行官身分驗證成功！中央數據庫通道已開啟。")
     
     if os.path.isfile(csv_file):
