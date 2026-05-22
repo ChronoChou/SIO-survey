@@ -7,6 +7,43 @@ from datetime import datetime
 st.set_page_config(page_title="SIO 情資收集系統", page_icon="🦉", layout="centered")
 
 # =====================================================================
+# 🔒 SIO 官方防偽浮水印安全部署 (注入 CSS 樣式)
+# =====================================================================
+# 檢查有沒有 logo 圖，有的話才啟動浮水印
+if os.path.isfile("sio_logo.png"):
+    st.markdown(
+        """
+        <style>
+        /* 鎖定 Streamlit 的主網頁背景 */
+        .stApp {
+            background-image: url("app/static/sio_logo.png");
+            background-repeat: no-repeat;
+            background-position: center 35%; /* 讓 logo 靠中、偏中上段顯示 */
+            background-size: 450px;          /* 浮水印的大小，可根據喜好調整 */
+            background-attachment: fixed;    /* 關鍵：固定背景，網頁滾動時浮水印不會跑掉 */
+            opacity: 1;                      /* 保持外層正常 */
+        }
+        
+        /* 透過偽元素單獨控制背景圖的透明度，才不會讓問卷的字也跟著變透明 */
+        .stApp::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("app/static/sio_logo.png");
+            background-repeat: no-repeat;
+            background-position: center 35%;
+            background-size: 450px;
+            background-attachment: fixed;
+            opacity: 0.04;                   /* 💡 核心參數：0.04 代表 4% 透明度，隱隱約約最像防偽浮水印 */
+            z-index: -1;                     /* 把圖層推到最後面，絕對不會擋到按鈕和字 */
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+# =====================================================================
+
+# =====================================================================
 # 🖼️ SIO 官方徽章置頂 (完美置中版)
 # =====================================================================
 if os.path.isfile("sio_3.png"):
@@ -25,7 +62,7 @@ if os.path.isfile("sio_3.png"):
 if os.path.isfile("sio_5.png"):
     # 建立三個左右對稱的虛擬欄位，比例為 1 : 2 : 1 
     # 中間的欄位比例較大(2)，用來放圖片；左右兩邊(1)負責當隱形推手
-    left_co, cent_co, right_co = st.columns([1, 16, 1])
+    left_co, cent_co, right_co = st.columns([1, 5, 1])
     
     # 叫 Streamlit 把圖片畫在中間那一欄
     with cent_co:
