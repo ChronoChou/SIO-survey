@@ -63,7 +63,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.markdown("<p style='text-align: center; color: #556677; font-size: 14px;'>胡搞SIO搞 - WHO GOAL SIO GOAL | 數據提供時間：" + datetime.now().strftime("%Y-%m-%d") + "</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #556677; font-size: 14px;'>胡搞SIO搞-WHO GOAL SIO GOAL | 數據提供時間：" + datetime.now().strftime("%Y-%m-%d") + "</p>", unsafe_allow_html=True)
 st.markdown("---")
 
 # =====================================================================
