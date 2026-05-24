@@ -9,8 +9,8 @@ st.set_page_config(page_title="SIO 家族旅遊數據成果報告", page_icon="�
 # =====================================================================
 # 🔒 SIO 官方防偽浮水印（成果報告專用版）
 # =====================================================================
-if os.path.isfile("sio_logo.png"):
-    with open("sio_logo.png", "rb") as img_file:
+if os.path.isfile("sio_6.png"):
+    with open("sio_6.png", "rb") as img_file:
         b64_string = base64.b64encode(img_file.read()).decode()
     
     st.markdown(
