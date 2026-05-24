@@ -80,9 +80,9 @@ def display_centered_chart(img_name, caption_text):
             st.markdown(f"<p style='text-align: center; color: #778899; font-size: 13px; margin-top: -10px;'>{caption_text}</p>", unsafe_allow_html=True)
             st.write("")
 
-display_centered_chart("P1.png", "圖一：初露滿意度與冬天從小路再出發意願統計")
-display_centered_chart("P2.png", "圖二：暑假家族旅遊型態（包棟 vs 露營）與天數偏好交叉分析")
-display_centered_chart("P3.png", "圖三：家族旅遊主辦分工模式與每人每晚預算接受度統計")
+display_centered_chart("P1.png", "圖一：冬天再次小路露營意願統計")
+display_centered_chart("P2.png", "圖二：暑假家族旅遊類型與天數統計")
+display_centered_chart("P3.png", "圖三：暑假家族旅遊天數與可接受預算統計")
 
 st.markdown("---")
 
