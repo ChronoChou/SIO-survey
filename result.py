@@ -63,13 +63,13 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.markdown("<p style='text-align: center; color: #556677; font-size: 14px;'>任務代號：PDC-2026-CAMP-001 | 數據解密時間：" + datetime.now().strftime("%Y-%m-%d") + "</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #556677; font-size: 14px;'>WHO GOAL SIO GOAL | 數據提供時間：" + datetime.now().strftime("%Y-%m-%d") + "</p>", unsafe_allow_html=True)
 st.markdown("---")
 
 # =====================================================================
 # 📊 第一部分：意向調查統計圖表展現
 # =====================================================================
-st.subheader("📊 數據統計可視化情資")
+st.subheader("📊 各項數據統計結果")
 
 # 功能函式：確保圖表置中且大小適中
 def display_centered_chart(img_name, caption_text):
@@ -89,7 +89,7 @@ st.markdown("---")
 # =====================================================================
 # 💬 第二部分：精美文字意見回饋
 # =====================================================================
-st.subheader("💬 家族特務真心話回饋")
+st.subheader("💬 家族真心話回饋")
 
 # HTML 質感文字框樣式定義
 def render_suggestion_box(title, feedback_list, border_color="#4A90E2"):
@@ -156,4 +156,4 @@ feedback_B = [
 render_suggestion_box("⛺ A. 初露留言建議及鼓勵", feedback_A, border_color="#3A7BD5")
 render_suggestion_box("🏡 B. 未來家族旅遊建議與期望", feedback_B, border_color="#00D2FF")
 
-st.markdown("<p style='text-align: center; color: #99A9BF; font-size: 14px; margin-top: 30px;'>SIO 家族最高決策群 謹製</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #99A9BF; font-size: 14px; margin-top: 30px;'>SIO 謹製</p>", unsafe_allow_html=True)
