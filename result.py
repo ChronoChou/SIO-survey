@@ -63,7 +63,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.markdown("<p style='text-align: center; color: #556677; font-size: 14px;'>WHO GOAL SIO GOAL | 數據提供時間：" + datetime.now().strftime("%Y-%m-%d") + "</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #556677; font-size: 14px;'>胡搞SIO搞 - WHO GOAL SIO GOAL | 數據提供時間：" + datetime.now().strftime("%Y-%m-%d") + "</p>", unsafe_allow_html=True)
 st.markdown("---")
 
 # =====================================================================
@@ -154,6 +154,6 @@ feedback_B = [
 
 # 渲染兩大回饋區塊
 render_suggestion_box("⛺ A. 初露留言建議及鼓勵", feedback_A, border_color="#3A7BD5")
-render_suggestion_box("🏡 B. 未來家族旅遊建議與期望", feedback_B, border_color="#00D2FF")
+render_suggestion_box("🏡 B. 家旅建議與期望", feedback_B, border_color="#00D2FF")
 
 st.markdown("<p style='text-align: center; color: #99A9BF; font-size: 14px; margin-top: 30px;'>SIO 謹製</p>", unsafe_allow_html=True)
