@@ -4,7 +4,7 @@ import base64
 from datetime import datetime
 
 # 1. 網頁基本設定 (特務機關成果報告風格)
-st.set_page_config(page_title="SIO 家族旅遊數據成果報告", page_icon="📊", layout="centered")
+st.set_page_config(page_title="Who goal SIO goal 家族旅遊統計結果", page_icon="📊", layout="centered")
 
 # =====================================================================
 # 🔒 SIO 官方防偽浮水印（成果報告專用版）
