@@ -7,15 +7,17 @@ from datetime import datetime
 st.set_page_config(page_title="胡搞SIO搞家族旅遊統計結果", page_icon="📊", layout="centered")
 
 # =====================================================================
-# 🔒 SIO 官方防偽浮水印（成果報告專用版）
+# 🔒 SIO 官方防偽浮水印（內嵌白底遮罩防遮擋 + 手機反白優化版）
 # =====================================================================
-if os.path.isfile("sio_6.png"):
-    with open("sio_6.png", "rb") as img_file:
+if os.path.isfile("sio_logo.png"):
+    with open("sio_logo.png", "rb") as img_file:
         b64_string = base64.b64encode(img_file.read()).decode()
     
+    # 💡 關鍵：所有網頁樣式（CSS）都必須死死地鎖在 st.markdown 內部的 <style> 標籤中
     st.markdown(
         f"""
         <style>
+        /* 1. 浮水印基本底層 */
         .stApp {{
             background-image: 
                 linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), 
@@ -25,10 +27,30 @@ if os.path.isfile("sio_6.png"):
             background-size: 420px !important;
             background-attachment: fixed !important;
         }}
+        
+        /* 2. 瑋瑋彩蛋隱形防線：平常全透明、不佔多餘空間 */
+        .secret-text {{
+            color: transparent !important;
+            user-select: text !important;
+            -webkit-user-select: text !important; /* 確保 iPhone Safari 也能順利選取 */
+        }}
+        
+        /* 3. 當用戶在手機或電腦上「反白選取」它時，強制把字體逼出顏色！ */
+        .secret-text::selection {{
+            color: #000000 !important;          /* 反白時，字體強制變黑色 */
+            background: #B4D5FE !important;     /* 反白時，底色變成經典的高亮藍 */
+        }}
+        
+        /* 4. 額外支援手機 Webkit 核心（iOS / LINE 瀏覽器專用防線） */
+        .secret-text::-webkit-selection {{
+            color: #000000 !important;
+            background: #B4D5FE !important;
+        }}
         </style>
         """,
         unsafe_allow_html=True
     )
+# =====================================================================
 
 # =====================================================================
 # 🖼️ SIO 官方徽章置頂
@@ -131,7 +153,7 @@ feedback_A = [
     "B:好，飲料喝什麼"
     "A:沒有了，就這樣飲料看你們自己喝什麼，或是要買什麼，飲料紅茶綠茶都可以，【問一下沒人回就『直接去』了】，不用等。可能有些是我沒有考慮到的部分，就先說聲抱歉嚕",
     "三人主辦成員很適合轉行當企劃，太有才了👍",
-    "育德又帥又會企劃，家綾姊很罩、最會照顧大家，瑋瑋詭計多端（？）<span style='color: transparent;'>顏值擔當、反差萌（？）</span>",
+    "育德又帥又會企劃，家綾姊很罩、最會照顧大家，瑋瑋詭計多端（？）<span class='secret-text'>顏值擔當、反差萌（？）</span>",
     "很感謝這次規劃的哥哥姐姐們，大家百忙之中抽空參與討論，一起為這次的旅遊盡一份心力，讓這次活動添加許多回憶。讓我看見大家都各奔東西，還會互相關心大家的生活狀況，一起談心說笑，這是很少家族有的團結和向心力，是這次我很喜歡的一個環節。建議的部分就是，營地可以選高海拔的地點，比較舒適。",
     "主辦辛苦了",
     "初露大成功～氣氛、天氣及地點，無論哪一項都很棒，感謝大家都很有默契的配合。",
