@@ -1,4 +1,5 @@
-import streamlit as st
+import streamlit as st  # 💡 已修正補上 as
+import pandas as pd     # 💡 已修正補上 as
 import os
 import base64
 from datetime import datetime
@@ -7,13 +8,12 @@ from datetime import datetime
 st.set_page_config(page_title="胡搞SIO搞家族旅遊統計結果", page_icon="📊", layout="centered")
 
 # =====================================================================
-# 🔒 SIO 官方防偽浮水印（內嵌白底遮罩防遮擋 + 手機反白優化版）
+# 🔒 SIO 官方防偽浮水印（手機端多重兼容版）
 # =====================================================================
 if os.path.isfile("sio_logo.png"):
     with open("sio_logo.png", "rb") as img_file:
         b64_string = base64.b64encode(img_file.read()).decode()
     
-    # 💡 關鍵：所有網頁樣式（CSS）都必須死死地鎖在 st.markdown 內部的 <style> 標籤中
     st.markdown(
         f"""
         <style>
@@ -28,23 +28,46 @@ if os.path.isfile("sio_logo.png"):
             background-attachment: fixed !important;
         }}
         
-        /* 2. 瑋瑋彩蛋隱形防線：平常全透明、不佔多餘空間 */
-        .secret-text {{
-            color: transparent !important;
-            user-select: text !important;
-            -webkit-user-select: text !important; /* 確保 iPhone Safari 也能順利選取 */
+        /* ==========================================
+           🕵️‍♂️ SIO 手機端專屬：輕觸解密黑科技 
+           ========================================== */
+        .spy-container {{
+            display: inline-block;
+            position: relative;
         }}
         
-        /* 3. 當用戶在手機或電腦上「反白選取」它時，強制把字體逼出顏色！ */
-        .secret-text::selection {{
-            color: #000000 !important;          /* 反白時，字體強制變黑色 */
-            background: #B4D5FE !important;     /* 反白時，底色變成經典的高亮藍 */
+        .spy-btn {{
+            display: inline-block;
+            background-color: #e2e8f0;
+            color: #4a5568;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 4px;
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
         }}
         
-        /* 4. 額外支援手機 Webkit 核心（iOS / LINE 瀏覽器專用防線） */
-        .secret-text::-webkit-selection {{
-            color: #000000 !important;
-            background: #B4D5FE !important;
+        .spy-text {{
+            display: none;
+            color: #2b2b2b;
+            font-weight: bold;
+            background-color: #fff9db;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }}
+        
+        /* 🎯 手指「按住(Active)」或是點擊後「聚焦(Focus)」時觸發切換 */
+        .spy-container:active .spy-btn,
+        .spy-container:focus .spy-btn {{
+            display: none !important;
+        }}
+        
+        .spy-container:active .spy-text,
+        .spy-container:focus .spy-text {{
+            display: inline !important;
         }}
         </style>
         """,
@@ -72,7 +95,7 @@ st.markdown(
     ">
         <span style="font-size: 26px; visibility: hidden;">🦉</span>
         <h1 style="
-            font-size: 26px; 
+            font-size: 24px; 
             margin: 0; 
             text-align: center; 
             flex-grow: 1; 
@@ -85,7 +108,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.markdown("<p style='text-align: center; color: #556677; font-size: 14px;'>胡搞SIO搞-WHO GOAL SIO GOAL | 數據提供時間：" + datetime.now().strftime("%Y-%m-%d") + "</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #556677; font-size: 13px;'>胡搞SIO搞-WHO GOAL SIO GOAL | 數據提供時間：" + datetime.now().strftime("%Y-%m-%d") + "</p>", unsafe_allow_html=True)
 st.markdown("---")
 
 # =====================================================================
@@ -93,13 +116,12 @@ st.markdown("---")
 # =====================================================================
 st.subheader("📊 各項數據統計結果")
 
-# 功能函式：確保圖表置中且大小適中
 def display_centered_chart(img_name, caption_text):
     if os.path.isfile(img_name):
         left, cent, right = st.columns([1, 12, 1])
         with cent:
             st.image(img_name, use_container_width=True)
-            st.markdown(f"<p style='text-align: center; color: #778899; font-size: 13px; margin-top: -10px;'>{caption_text}</p>", unsafe_allow_html=True)
+            st.markdown(f"<p style='text-align: center; color: #778899; font-size: 12px; margin-top: -10px;'>{caption_text}</p>", unsafe_allow_html=True)
             st.write("")
 
 display_centered_chart("P1.png", "圖一：冬天再次小路露營意願統計")
@@ -113,21 +135,19 @@ st.markdown("---")
 # =====================================================================
 st.subheader("💬 家族真心話回饋")
 
-# HTML 質感文字框樣式定義
 def render_suggestion_box(title, feedback_list, border_color="#4A90E2"):
     html_content = f"""
     <div style="
         border-left: 5px solid {border_color}; 
         background-color: rgba(245, 247, 250, 0.8); 
-        padding: 15px; 
+        padding: 12px; 
         border-radius: 0 8px 8px 0; 
         margin-bottom: 20px;
     ">
-        <h4 style="margin-top: 0; color: #2C3E50; font-weight: bold;">{title}</h4>
-        <ol style="margin-bottom: 0; padding-left: 20px; color: #34495E; line-height: 1.7; font-size: 15px;">
+        <h4 style="margin-top: 0; color: #2C3E50; font-weight: bold; font-size: 16px;">{title}</h4>
+        <ol style="margin-bottom: 0; padding-left: 20px; color: #34495E; line-height: 1.7; font-size: 14px;">
     """
     for item in feedback_list:
-        # 將換行符號轉成網頁換行標籤
         safe_item = item.replace("\n", "<br>")
         html_content += f"<li style='margin-bottom: 12px;'>{safe_item}</li>"
         
@@ -142,18 +162,19 @@ feedback_A = [
     "嘻嘻嘻嘻嘻",
     "這趟旅程很開心好棒👍🏻",
     "我應該要準備肉品的覺得肉品有點少",
-    "據我看到的個人想法，看到幾乎家綾姐承包了很多東西，不管是吃的用的，都幫大家盡量減少支付費用的金額，姐也說我們都是一家人家裡有什麼能帶就帶，減少支出幫大家省錢，東西多到塞兩車才載完，很感謝姐、姐夫幫大家省扣扣。"
-    "我覺得因為這樣幫忙省很多也幫忙買午餐飯捲，怕小朋友餓到、大家餓到，真素細心照料大家的巴豆，我覺得彼此應該要一起幫忙弄，分工合作，重點就是我覺得應該要在積極主動，幫忙減輕彼此的負擔，大家都是從各地到小路齊聚的，大家的體力也是有限，我看到的就是家綾姐姐一直在照料大家的巴豆。"
-    "再來是我覺得溝通要在明確，缺少東西要去買，據我所知要買的東西已經交代清楚了，等了半小時快一小時還沒去買，雖然中途突然說要買油，但那是意外沒想到居然沒油了，目前就想到醬。"
-    "第一個就是主動幫忙，分工要明確確實一點"
-    "第二個就是溝通，更好的溝通"
-    "A:買東西"
-    "B:買什麼"
-    "A:飲料、柴魚片、#$^^#&+!-"
-    "B:好，飲料喝什麼"
+    "據我看到的個人想法，看到幾乎家綾姐承包了很多東西，不管是吃的用的，都幫大家盡量減少支付費用的金額，姐也說我們都是一家人家裡有什麼能帶就帶，減少支出幫大家省錢，東西多到塞兩車才載完，很感謝姐、姐夫幫大家省扣扣。",
+    "我覺得因為這樣幫忙省很多也幫忙買午餐飯捲，怕小朋友餓到、大家餓到，真素細心照料大家的巴豆，我覺得彼此應該要一起幫忙弄，分工合作，重點就是我覺得應該要在積極主動，幫忙減輕彼此的負擔，大家都是從各地到小路齊聚的，大家的體力也是有限，我看到的就是家綾姐姐一直在照料大家的巴豆。",
+    "再來是我覺得溝通要在明確，缺少東西要去買，據我所知要買的東西已經交代清楚了 Harris，等了半小時快一小時還沒去買，雖然中途突然說要買油，但那是意外沒想到居然沒油了，目前就想到醬。",
+    "第一個就是主動幫忙，分工要明確確實一點",
+    "第二個就是溝通，更好的溝通",
+    "A:買東西",
+    "B:買什麼",
+    "A:飲料、柴魚片、#$^^#&+!-",
+    "B:好，飲料喝什麼",
     "A:沒有了，就這樣飲料看你們自己喝什麼，或是要買什麼，飲料紅茶綠茶都可以，【問一下沒人回就『直接去』了】，不用等。可能有些是我沒有考慮到的部分，就先說聲抱歉嚕",
     "三人主辦成員很適合轉行當企劃，太有才了👍",
-    "育德又帥又會企劃，家綾姊很罩、最會照顧大家，瑋瑋詭計多端<details style='display: inline-block; vertical-align: top;'><summary style='color: #34495E; cursor: pointer; list-style: none; outline: none;'>（？）</summary><span style='color: #2b2b2b; font-weight: bold;'> 顏值擔當、反差萌（？）</span></details>",
+    # 🎯 點擊解密核心組件
+    "育德又帥又會企劃，家綾姊很罩、最會照顧大家，瑋瑋詭計多端（？）<div class='spy-container' tabindex='0'><span class='spy-btn'>🔍 解密情資</span><span class='spy-text'>顏值擔當、反差萌（？）</span></div>",
     "很感謝這次規劃的哥哥姐姐們，大家百忙之中抽空參與討論，一起為這次的旅遊盡一份心力，讓這次活動添加許多回憶。讓我看見大家都各奔東西，還會互相關心大家的生活狀況，一起談心說笑，這是很少家族有的團結和向心力，是這次我很喜歡的一個環節。建議的部分就是，營地可以選高海拔的地點，比較舒適。",
     "主辦辛苦了",
     "初露大成功～氣氛、天氣及地點，無論哪一項都很棒，感謝大家都很有默契的配合。",
@@ -182,4 +203,4 @@ feedback_B = [
 render_suggestion_box("⛺ A. 初露留言建議及鼓勵", feedback_A, border_color="#3A7BD5")
 render_suggestion_box("🏡 B. 家旅建議與期望", feedback_B, border_color="#00D2FF")
 
-st.markdown("<p style='text-align: center; color: #99A9BF; font-size: 14px; margin-top: 30px;'>SIO 謹製</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #99A9BF; font-size: 13px; margin-top: 30px;'>SIO 謹製</p>", unsafe_allow_html=True)
