@@ -179,7 +179,7 @@ feedback_A = [
     "主辦辛苦了",
     "初露大成功～氣氛、天氣及地點，無論哪一項都很棒，感謝大家都很有默契的配合。",
     "可以再多天一點",
-    "三位主辦都很棒，完美！"
+    "三位主辦都很棒，完美！<div class='spy-container' tabindex='0'><span class='spy-btn'> </span><span class='spy-text'>顏值擔當（？）反差萌（？）</span></div>"
 ]
 
 # --- 整理後的 B 資料集 ---
